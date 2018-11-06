@@ -10,7 +10,7 @@ import React from 'react'
 import Startup from './app_start/startup';
 import {createStack} from './src/screens/screens';
 import { inject } from 'inversify';
-import { PUBLIC_TYPES, ITestService } from 'business-core-app';
+import { PUBLIC_TYPES, ITestService } from 'business_core_app_react';
 
 Startup.start();
 

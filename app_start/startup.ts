@@ -1,4 +1,4 @@
-import { ENV, FactoryInjection, PUBLIC_TYPES, IWebApi, IStore } from "business-core-app";
+import { ENV, FactoryInjection, PUBLIC_TYPES, IWebApi, IStore } from "business_core_app_react";
 import Config from "react-native-config";
 import { AsyncStorageStore } from "../src/infrastructure/asyncstoragestore";
 import {handleBusinessError, handleexceptionError} from './apierrorhandle';

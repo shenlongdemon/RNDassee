@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import INavigation from './inavigation';
-import { PUBLIC_TYPES, IAuthService, FactoryInjection } from 'business-core-app';
+import { PUBLIC_TYPES, IAuthService, FactoryInjection } from 'business_core_app_react';
 import { inject } from 'inversify';
 const RNN = require('react-navigation');
 

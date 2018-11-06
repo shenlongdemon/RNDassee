@@ -1,7 +1,6 @@
-import { IStore, STORAGE_KEYS } from "business-core-app";
-import { AsyncStorage } from "react-native"
-
-import { injectable } from "inversify";
+import { IStore, STORAGE_KEYS } from 'business_core_app_react';
+import { AsyncStorage } from 'react-native';
+import { injectable } from 'inversify';
 
 @injectable()
 export class AsyncStorageStore implements IStore {

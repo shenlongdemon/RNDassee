@@ -1,4 +1,4 @@
-import { ErrorResult } from "business-core-app";
+import { ErrorResult } from "business_core_app_react";
 
 const handleBusinessError = (error: ErrorResult): void => {
 }
