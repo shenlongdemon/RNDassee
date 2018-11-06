@@ -1,0 +1,39 @@
+{
+  "name": "posbillapp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "preinstall": "rm -rf ./package-lock.json && rm -rf ./node_modules/business-core-app",
+    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "test": "jest",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
+    "setup-core": "rm -rf ./node_modules/react_business_core && cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/react_business_core.git",
+    "postinstall": "npm run setup-core"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "7.1.2",
+    "business-core-app": "git+https://github.com/shenlongdemon/react_business_core.git#dassee",
+    "inversify": "4.13.0",
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "0.57.3",
+    "react-native-config": "0.11.5",
+    "react-navigation": "2.18.2",
+    "reflect-metadata": "0.1.12"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.1.2",
+    "@types/react": "16.4.18",
+    "@types/react-native": "0.57.7",
+    "babel-jest": "23.6.0",
+    "babel-plugin-module-resolver": "3.1.1",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.48.1",
+    "react-native-typescript-transformer": "1.2.10",
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "typescript": "3.1.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
