@@ -8,7 +8,7 @@
     "test": "jest",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
-    "setup-core": "rm -rf ./node_modules/business_core_app_react && cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/business_core_app_react.git",
+    "setup-core": "rm -rf ./node_modules/business_core_app_react && cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
     "postinstall": "npm run setup-core"
   },
   "dependencies": {
