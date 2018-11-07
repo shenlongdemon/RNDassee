@@ -3,13 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "rm -rf ./package-lock.json && rm -rf ./node_modules/business_core_app_react",
+    "del-core": "rm -rf ./package-lock.json && rm -rf ./node_modules/business_core_app_react",
+    "pull-core": "cd ./node_modules/ && git clone -b ft_init https://gitlab.com/posbird_phoenix/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
+    "setup-dev": "npm run del-core && npm run pull-core",
+    "preinstall": "npm run del-core",
     "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest",
     "ios": "react-native run-ios",
-    "android": "react-native run-android",
-    "setup-core": "rm -rf ./node_modules/business_core_app_react && cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
-    "postinstall": "npm run setup-core"
+    "android": "react-native run-android"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",
