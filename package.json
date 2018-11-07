@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "del-core": "rm -rf ./package-lock.json && rm -rf ./node_modules/business_core_app_react",
-    "pull-core": "cd ./node_modules/ && git clone -b ft_init https://gitlab.com/posbird_phoenix/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
+    "pull-core": "cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
     "setup-dev": "npm run del-core && npm run pull-core",
     "preinstall": "npm run del-core",
     "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",
-    "business-core-app": "git+https://github.com/shenlongdemon/business_core_app_react.git#dassee",
+    "business_core_app_react": "git+https://github.com/shenlongdemon/business_core_app_react.git#dassee",
     "inversify": "4.13.0",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
