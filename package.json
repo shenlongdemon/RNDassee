@@ -7,7 +7,7 @@
     "pull-core": "cd ./node_modules/ && git clone -b dassee https://github.com/shenlongdemon/business_core_app_react.git && cd ./business_core_app_react/ && npm install",
     "setup-dev": "npm run del-core && npm run pull-core",
     "preinstall": "npm run del-core",
-    "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
+    "start": "npm cache clean --force && node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest",
     "ios": "react-native run-ios",
     "android": "react-native run-android"

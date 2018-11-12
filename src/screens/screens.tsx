@@ -1,34 +1,18 @@
 const RNN = require('react-navigation');
-import MasterLogin from './auth/masterlogin';
-import UserLogin from './auth/userlogin';
+import Login from './auth/login';
 import Loading from './loading';
 
-const authStack = RNN.createStackNavigator({
-  MasterLogin: {
-    screen: MasterLogin
-  },
-  UserLogin: {
-      screen: UserLogin
-  }
-},
-{
-  initialRouteName: 'MasterLogin',
-}
-);
 
 const createStack = RNN.createStackNavigator({
-    auth: {
-      screen: authStack
+        login: Login,
+        loading: {
+            screen: Loading,
+        }
     },
-    Loading: {
-        screen: Loading,
-        
-    }
-},
-  {
-    initialRouteName: 'Loading',
-    mode: 'modal',
+    {
+        initialRouteName: 'loading',
+        mode: 'modal',
         headerMode: 'none',
-  }
+    }
 );
 export {createStack};

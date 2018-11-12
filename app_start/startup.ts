@@ -1,7 +1,7 @@
 import { ENV, FactoryInjection, PUBLIC_TYPES, IWebApi, IStore } from 'business_core_app_react';
 import Config from 'react-native-config';
 import { AsyncStorageStore } from '../src/infrastructure/asyncstoragestore';
-import {handleBusinessError, handleexceptionError} from './apierrorhandle';
+import {handleBusinessError, handleExceptionError, generateHeader} from './apihandle';
 export default class Startup {
     
     static start = (): void => {
@@ -19,6 +19,7 @@ export default class Startup {
     private static handleApiError = (): void => {
         let webapi: IWebApi = FactoryInjection.get<IWebApi>(PUBLIC_TYPES.IWebApi);
         webapi.handleBusinessError(handleBusinessError);
-        webapi.handleExceptionError(handleexceptionError);
+        webapi.handleExceptionError(handleExceptionError);
+        webapi.setGenHeader(generateHeader);
     }
 }
