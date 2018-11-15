@@ -10,7 +10,7 @@
     "start": "npm cache clean --force && node node_modules/react-native/local-cli/cli.js start --reset-cache",
     "test": "jest",
     "ios": "react-native run-ios",
-    "android": "react-native run-android"
+    "android": "ENVFILE=.env react-native run-android"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",
@@ -20,7 +20,12 @@
     "react-native": "0.57.3",
     "react-native-config": "0.11.5",
     "react-navigation": "2.18.2",
-    "reflect-metadata": "0.1.12"
+    "reflect-metadata": "0.1.12",
+    "react-native-easy-grid": "0.2.0",
+    "react-native-elements": "0.19.1",
+    "react-native-textinput-effects": "0.4.2",
+    "react-native-vector-icons": "6.0.2",
+    "yup": "0.26.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",

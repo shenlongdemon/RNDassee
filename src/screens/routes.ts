@@ -1,6 +1,11 @@
 export const ROUTE = {
     LOGIN : 'login',
     APP: {
-        DEFAULT: ''
-    }
+        USER: {
+            DEFAULT: 'usermain',
+        },
+        MANUFACTORY: {
+            DEFAULT: 'manufactorymain',
+        },
+    },
 }
