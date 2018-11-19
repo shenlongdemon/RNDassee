@@ -5,58 +5,58 @@ import {Button} from 'react-native-elements';
 import {Platform, StyleSheet, Text, View, TextInput, FlatList} from 'react-native';
 import {
     FactoryInjection,
-    Goods,
+    Process,
     IAuthService,
     PUBLIC_TYPES,
     IBusinessService,
-    GoodsListDto
+    ProcessListDto
 } from 'business_core_app_react';
-import * as Styles from '../../stylesheet';
-import GoodsItem from '../../components/listitem/goodsitem';
+import ProcessItem from '../../components/listitem/processitem';
 
 interface Props {
 
 }
 
 interface State {
-    goodses: Goods[];
+    processes: Process[];
 }
 
-export default class GoodsScreen extends BaseScreen<Props, State> {
+export default class ProcessesScreen extends BaseScreen<Props, State> {
     private businessService: IBusinessService = FactoryInjection.get<IBusinessService>(PUBLIC_TYPES.IBusinessService);
-
+    
     constructor(props: Props) {
         super(props);
         this.state = {
-            goodses: []
+            processes: []
         };
         this.clickListItem = this.clickListItem.bind(this);
+        this.componentDidFocus = this.componentDidFocus.bind(this);
     }
-
-    componentDidMount = async (): Promise<void> => {
-        this.loadGoods();
+    
+    private clickListItem = (item: Process, index: number): void => {
+    
     }
-
-    private clickListItem = (item: Goods, index: number): void => {
-
+    
+    componentDidFocus = async (): Promise<void> => {
+        this.loadProcesses();
     }
-
-    private loadGoods = async (): Promise<void> => {
-        const goodsListDto: GoodsListDto = await this.businessService.getGoods();
-        if (goodsListDto.isSuccess) {
-            this.setState({goodses: goodsListDto.goodses});
+    
+    private loadProcesses = async (): Promise<void> => {
+        const processListDto: ProcessListDto = await this.businessService.getProcesses();
+        if (processListDto.isSuccess) {
+            this.setState({processes: processListDto.processes});
         }
     }
-
+    
     render() {
         return (
-            <BaseScreen>
+            <BaseScreen {...{...this.props, componentDidFocus: this.componentDidFocus}}>
                 <FlatList
                     style={{flex: 1}}
-                    data={this.state.goodses}
+                    data={this.state.processes}
                     showsVerticalScrollIndicator={false}
                     renderItem={({item, index}) =>
-                        <GoodsItem item={item} index={index}
+                        <ProcessItem item={item} index={index}
                                    onClickHandle={this.clickListItem}/>
                     }
                     keyExtractor={(item) => item.id}

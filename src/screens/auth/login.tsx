@@ -26,7 +26,7 @@ export default class Login extends React.Component<Props, State> {
     render() {
         return (
             <View>
-                <Text>User login</Text>
+            
             </View>
         );
     }

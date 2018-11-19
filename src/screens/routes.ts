@@ -9,6 +9,8 @@ export const ROUTE = {
         },
         MANUFACTORY: {
             DEFAULT: 'manufactory',
+            GOODSES: 'goodses',
+            PROCESSES: 'processes'
         },
     },
 }

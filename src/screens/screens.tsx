@@ -5,12 +5,13 @@ import Login from './auth/login';
 import Loading from './loading';
 import UserMain from "./main/usermain";
 import ManufactoryMain from "./main/manufactorymain";
+import GoodsScreen from "./main/goods";
+import ProcessesScreen from "./main/processes";
+import * as Styles from "../stylesheet";
 
 const userStack = RNN.createStackNavigator(
     {
-        main: {
-            screen: UserMain
-        }
+        main: UserMain,
     },
     {
         initialRouteName: 'main'
@@ -19,12 +20,24 @@ const userStack = RNN.createStackNavigator(
 
 const manufactoryStack = RNN.createStackNavigator(
     {
-        main: {
-            screen: ManufactoryMain
-        }
+        main: ManufactoryMain,
+        goodses: GoodsScreen,
+        processes: ProcessesScreen
+        
     },
     {
-        initialRouteName: 'main'
+        initialRouteName: 'main',
+        navigationOptions : {
+            headerStyle: {
+                backgroundColor: Styles.color.Navigation.Background,
+            },
+            headerTintColor: Styles.color.Navigation.Tint,
+            headerTitleStyle: {
+                textAlign: 'center',
+                fontWeight: Styles.styles.Navigation.FontWeight,
+                width: '100%',
+            },
+        },
     }
 );
 

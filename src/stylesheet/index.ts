@@ -5,11 +5,18 @@ const color = {
     Icon: '#00b300',
     Red: '#FF0000',
     Text: '#007100',
+    Navigation: {
+        Background: '#13b360',
+        Tint: '#FFFFFF',
+    }
 };
 
-const styles = StyleSheet.create({
-    btn: {},
-});
+const styles = {
+    Navigation: {
+        FontWeight: 'bold',
+    },
+};
+
 
 const props = {
     btn: {
@@ -21,4 +28,4 @@ const props = {
     }
 };
 
-export {props, color};
+export {props, color, styles};

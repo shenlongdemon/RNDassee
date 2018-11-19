@@ -1,8 +1,14 @@
 import * as React from 'react';
-import {ImageBackground, View} from 'react-native';
+import {ImageBackground, EmitterSubscription} from 'react-native';
 import * as IMAGE from '../assets';
 
-export default class Basescreen<T, S> extends React.Component<T, S> {
+interface Props{
+    componentDidFocus?: (() => Promise<void>) | null;
+}
+
+export default class Basescreen<T extends Props, S> extends React.Component<Props, S> {
+    private didBlurSubscription? : EmitterSubscription | null;
+    
     constructor(props: T) {
         super(props);
     }
@@ -11,7 +17,31 @@ export default class Basescreen<T, S> extends React.Component<T, S> {
         // @ts-ignore
         this.props.navigation.navigate(routeName);
     }
-
+    componentDidMount = (): void => {
+        this.extendEvents();
+    };
+    
+    componentWillUnmount = (): void => {
+        if (this.didBlurSubscription) {
+            this.didBlurSubscription.remove();
+        }
+    }
+    
+    private extendEvents = (): void => {
+        // @ts-ignore
+        if (this.props.navigation) {
+            // @ts-ignore
+            this.didBlurSubscription = this.props.navigation.addListener(
+                'didFocus',
+                (payload: any) => {
+                    if (this.props.componentDidFocus) {
+                        this.props.componentDidFocus();
+                    }
+                }
+            );
+        }
+    };
+    
     render() {
         return (
             <ImageBackground source={IMAGE.background}
