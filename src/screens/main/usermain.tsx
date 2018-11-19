@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Grid, Row, Col} from 'react-native-easy-grid';
+import {Text} from 'react-native';
 import BaseScreen from '../basescreen';
 import {Button} from 'react-native-elements';
 import * as Styles from '../../stylesheet';
@@ -19,7 +20,7 @@ export default class UserMain extends BaseScreen<Props, State>{
     render() {
         return (
             <BaseScreen>
-                <Grid></Grid>
+                <Text>User</Text>
             </BaseScreen>
         );
     }

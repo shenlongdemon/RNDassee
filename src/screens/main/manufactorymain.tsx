@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Text} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import BaseScreen from '../basescreen';
 import {Button} from 'react-native-elements';
@@ -19,7 +20,7 @@ export default class ManufactoryMain extends BaseScreen<Props, State>{
     render() {
         return (
             <BaseScreen>
-                <Grid></Grid>
+                <Text>Manufactory</Text>
             </BaseScreen>
         );
     }

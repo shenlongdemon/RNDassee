@@ -1,11 +1,14 @@
 export const ROUTE = {
     LOGIN : 'login',
+    SWItCHFEATURE: {
+        DEFAULT: 'switchfeature',
+    },
     APP: {
         USER: {
-            DEFAULT: 'usermain',
+            DEFAULT: 'user',
         },
         MANUFACTORY: {
-            DEFAULT: 'manufactorymain',
+            DEFAULT: 'manufactory',
         },
     },
 }

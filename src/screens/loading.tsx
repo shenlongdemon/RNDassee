@@ -11,13 +11,12 @@ interface State {}
 export default class Loading extends BasesSreen<Props, State> {
     private authService: IAuthService = FactoryInjection.get(PUBLIC_TYPES.IAuthService);
     componentDidMount = async (): Promise<void> => {
-        debugger;
       let isMasterLogged = await this.authService.isLoggedIn();
       if (!isMasterLogged) {
         this.navigate(ROUTE.LOGIN);
       }
       else {
-        this.navigate(ROUTE.LOGIN);
+        this.navigate(ROUTE.SWItCHFEATURE.DEFAULT);
       }
       
     }
