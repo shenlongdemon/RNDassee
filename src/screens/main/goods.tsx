@@ -5,21 +5,23 @@ import {Button} from 'react-native-elements';
 import {Platform, StyleSheet, Text, View, TextInput, FlatList} from 'react-native';
 import {
     FactoryInjection,
-    Goods,
+    Item,
     IAuthService,
     PUBLIC_TYPES,
     IBusinessService,
-    GoodsListDto
+    ItemListDto
 } from 'business_core_app_react';
 import * as Styles from '../../stylesheet';
+import {ROUTE} from "../routes";
 import GoodsItem from '../../components/listitem/goodsitem';
+import {PARAMS} from '../../common';
 
 interface Props {
 
 }
 
 interface State {
-    goodses: Goods[];
+    goodses: Item[];
 }
 
 export default class GoodsScreen extends BaseScreen<Props, State> {
@@ -37,14 +39,17 @@ export default class GoodsScreen extends BaseScreen<Props, State> {
         this.loadGoods();
     }
 
-    private clickListItem = (item: Goods, index: number): void => {
-
+    private clickListItem = (item: Item, index: number): void => {
+        const data: any = {};
+        data[PARAMS.ITEM] = item;
+        
+        this.navigate(ROUTE.APP.MANUFACTORY.GOODSES.ITEM.DEFAULT, data)
     }
 
     private loadGoods = async (): Promise<void> => {
-        const goodsListDto: GoodsListDto = await this.businessService.getGoods();
-        if (goodsListDto.isSuccess) {
-            this.setState({goodses: goodsListDto.goodses});
+        const itemListDto: ItemListDto = await this.businessService.getItems();
+        if (itemListDto.isSuccess) {
+            this.setState({goodses: itemListDto.items});
         }
     }
 

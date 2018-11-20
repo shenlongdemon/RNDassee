@@ -16,7 +16,7 @@ export default class Loading extends BasesSreen<Props, State> {
         this.navigate(ROUTE.LOGIN);
       }
       else {
-        this.navigate(ROUTE.SWItCHFEATURE.DEFAULT);
+        this.navigate(ROUTE.SWITCHFEATURE.DEFAULT);
       }
       
     }

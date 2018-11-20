@@ -2,20 +2,26 @@ import * as React from 'react';
 import {ImageBackground, EmitterSubscription} from 'react-native';
 import * as IMAGE from '../assets';
 
-interface Props{
+interface INavitation {
+
+}
+interface Props {
     componentDidFocus?: (() => Promise<void>) | null;
+    navigation?: INavitation | null;
 }
 
 export default class Basescreen<T extends Props, S> extends React.Component<Props, S> {
-    private didBlurSubscription? : EmitterSubscription | null;
+    private didBlurSubscription?: EmitterSubscription | null;
     
     constructor(props: T) {
         super(props);
     }
-
-    navigate = (routeName: string): void => {
-        // @ts-ignore
-        this.props.navigation.navigate(routeName);
+    
+    navigate = (routeName: string, data: any | null = null): void => {
+        if (this.props.navigation) {
+            // @ts-ignore
+            this.props.navigation.navigate(routeName, data);
+        }
     }
     componentDidMount = (): void => {
         this.extendEvents();
@@ -26,6 +32,17 @@ export default class Basescreen<T extends Props, S> extends React.Component<Prop
             this.didBlurSubscription.remove();
         }
     }
+    
+    getParam = <Q extends {}>(key: string, defaultValue: Q | null): Q | null => {
+    
+        let data: Q | null = null;
+        if (this.props.navigation) {
+            // @ts-ignore
+            data = this.props.navigation.getParam(key, defaultValue);
+        }
+        
+        return data;
+    };
     
     private extendEvents = (): void => {
         // @ts-ignore

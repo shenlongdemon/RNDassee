@@ -1,6 +1,6 @@
 export const ROUTE = {
     LOGIN : 'login',
-    SWItCHFEATURE: {
+    SWITCHFEATURE: {
         DEFAULT: 'switchfeature',
     },
     APP: {
@@ -9,8 +9,14 @@ export const ROUTE = {
         },
         MANUFACTORY: {
             DEFAULT: 'manufactory',
-            GOODSES: 'goodses',
-            PROCESSES: 'processes'
+            GOODSES: {
+                DEFAULT: 'goodses',
+                ITEM: {
+                    DEFAULT: 'goodsdetail'
+                }
+            },
+            PROCESSES: 'processes',
+            
         },
     },
 }

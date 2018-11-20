@@ -8,6 +8,18 @@ import ManufactoryMain from "./main/manufactorymain";
 import GoodsScreen from "./main/goods";
 import ProcessesScreen from "./main/processes";
 import * as Styles from "../stylesheet";
+import GoodsInfoScreen from "./main/itemtabs/info";
+import GoodsHistoryScreen from "./main/itemtabs/history";
+
+const goodsTab = RNN.createTabNavigator(
+    {
+        info: GoodsInfoScreen,
+        history: GoodsHistoryScreen
+    },
+    {
+        initialRouteName: 'info'
+    }
+);
 
 const userStack = RNN.createStackNavigator(
     {
@@ -22,8 +34,8 @@ const manufactoryStack = RNN.createStackNavigator(
     {
         main: ManufactoryMain,
         goodses: GoodsScreen,
-        processes: ProcessesScreen
-        
+        processes: ProcessesScreen,
+        goodsdetail: goodsTab,
     },
     {
         initialRouteName: 'main',
