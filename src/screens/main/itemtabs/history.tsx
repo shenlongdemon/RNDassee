@@ -2,8 +2,8 @@ import * as React from 'react';
 import {FlatList, Text, View} from 'react-native';
 import BasesSreen from "../../basescreen";
 import {Grid, Row} from "react-native-easy-grid";
-import ProcessItem from "../../../components/listitem/processitem";
-import {ItemHistory, Item} from 'business_core_app_react';
+import HistoryItem from "../../../components/listitem/historyitem";
+import {ItemHistory, Item, IBusinessService, FactoryInjection, PUBLIC_TYPES} from 'business_core_app_react';
 import {PARAMS} from "../../../common";
 import {ROUTE} from "../../routes";
 
@@ -15,12 +15,12 @@ interface State {
 }
 
 export default class GoodsHistoryScreen extends BasesSreen<Props, State> {
+    private businessService: IBusinessService = FactoryInjection.get<IBusinessService>(PUBLIC_TYPES.IBusinessService);
     
     constructor(props: Props) {
         super(props);
-        const item: Item | null = this.getParam<Item>(PARAMS.ITEM, null);
         this.state = {
-            histories: item ? item.getHistories() : []
+            histories: []
         };
         this.clickListItem = this.clickListItem.bind(this);
         
@@ -28,11 +28,15 @@ export default class GoodsHistoryScreen extends BasesSreen<Props, State> {
     
     
     componentDidMount = async (): Promise<void> => {
-    
+        const item: Item | null = this.getParam<Item>(PARAMS.ITEM, null);
+        if (item) {
+            const histories: ItemHistory[] = await this.businessService.getItemHistories(item);
+            this.setState({histories: histories});
+        }
     }
     
     private clickListItem = (item: ItemHistory, index: number): void => {
-        
+    
     }
     
     render() {
@@ -48,7 +52,7 @@ export default class GoodsHistoryScreen extends BasesSreen<Props, State> {
                             data={this.state.histories}
                             showsVerticalScrollIndicator={false}
                             renderItem={({item, index}) =>
-                                <ItemHistory item={item} index={index}
+                                <HistoryItem item={item} index={index}
                                              onClickHandle={this.clickListItem}/>
                             }
                             keyExtractor={(item) => item.id}

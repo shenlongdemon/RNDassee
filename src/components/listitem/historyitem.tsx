@@ -4,9 +4,9 @@ import {Col, Grid, Row} from 'react-native-easy-grid';
 import * as IMAGE from '../../assets';
 import BaseItem from './baseitem';
 import IBaseItem from './ibaseitem';
-import {Item} from 'business_core_app_react';
+import {ItemHistory} from 'business_core_app_react';
 
-interface Props extends IBaseItem<Item> {
+interface Props extends IBaseItem<ItemHistory> {
 
 }
 
@@ -14,18 +14,18 @@ interface State {
     image: any;
 }
 
-export default class GoodsItem extends BaseItem<Item, State> {
+export default class HistoryItem extends BaseItem<ItemHistory, State> {
     constructor(props: Props) {
         super(props);
         // this.state = {image: {uri: this.props.item.avatar}};
         this.state = {image: IMAGE.profile};
     }
-
+    
     componentDidMount = (): void => {
     }
-
+    
     render() {
-
+        
         return (
             // @ts-ignore
             <BaseItem {...this.props} >
