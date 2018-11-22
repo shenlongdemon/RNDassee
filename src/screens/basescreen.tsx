@@ -23,6 +23,12 @@ export default class Basescreen<T extends Props, S> extends React.Component<Prop
             this.props.navigation.navigate(routeName, data);
         }
     }
+    goBack = () : void => {
+        if (this.props.navigation) {
+            // @ts-ignore
+            this.props.navigation.goBack();
+        }
+    }
     componentDidMount = (): void => {
         this.extendEvents();
     };

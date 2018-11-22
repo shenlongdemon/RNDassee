@@ -15,7 +15,12 @@ export const ROUTE = {
                     DEFAULT: 'goodsdetail'
                 }
             },
-            PROCESSES: 'processes',
+            PROCESSES: {
+                DEFAULT: 'processes',
+                ITEM: {
+                    DEFAULT: 'detail'
+                }
+            }
             
         },
     },

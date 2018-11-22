@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Grid, Row, Col} from 'react-native-easy-grid';
-import BaseScreen from '../basescreen';
+import BaseScreen from '../../basescreen';
 import {Button} from 'react-native-elements';
 import {Platform, StyleSheet, Text, View, TextInput, FlatList} from 'react-native';
 import {
@@ -11,7 +11,9 @@ import {
     IBusinessService,
     ProcessListDto
 } from 'business_core_app_react';
-import ProcessItem from '../../components/listitem/processitem';
+import ProcessItem from '../../../components/listitem/processitem';
+import {PARAMS} from "../../../common/index";
+import {ROUTE} from "../../routes";
 
 interface Props {
 
@@ -34,7 +36,10 @@ export default class ProcessesScreen extends BaseScreen<Props, State> {
     }
     
     private clickListItem = (item: Process, index: number): void => {
+        const data: any = {};
+        data[PARAMS.PROCESS] = item;
     
+        this.navigate(ROUTE.APP.MANUFACTORY.PROCESSES.ITEM.DEFAULT, data)
     }
     
     componentDidFocus = async (): Promise<void> => {

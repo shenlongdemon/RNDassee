@@ -6,10 +6,11 @@ import Loading from './loading';
 import UserMain from "./main/usermain";
 import ManufactoryMain from "./main/manufactorymain";
 import GoodsScreen from "./main/goods";
-import ProcessesScreen from "./main/processes";
+import ProcessesScreen from "./main/process/processes";
 import * as Styles from "../stylesheet";
 import GoodsInfoScreen from "./main/itemtabs/info";
 import GoodsHistoryScreen from "./main/itemtabs/history";
+import ProcessDetail from "./main/process/processdetail";
 
 const goodsTab = RNN.createTabNavigator(
     {
@@ -30,11 +31,21 @@ const userStack = RNN.createStackNavigator(
     }
 );
 
+const processStack = RNN.createStackNavigator(
+    {
+        main: ProcessesScreen,
+        detail: ProcessDetail,
+    },
+    {
+        initialRouteName: 'main'
+    }
+);
+
 const manufactoryStack = RNN.createStackNavigator(
     {
         main: ManufactoryMain,
         goodses: GoodsScreen,
-        processes: ProcessesScreen,
+        processes: processStack,
         goodsdetail: goodsTab,
     },
     {

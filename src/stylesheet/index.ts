@@ -8,6 +8,9 @@ const color = {
     Navigation: {
         Background: '#13b360',
         Tint: '#FFFFFF',
+    },
+    Map: {
+        Line: '#FFFFFF',
     }
 };
 

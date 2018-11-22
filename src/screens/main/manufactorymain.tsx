@@ -25,7 +25,7 @@ export default class ManufactoryMain extends BaseScreen<Props, State> {
         this.navigate(ROUTE.APP.MANUFACTORY.GOODSES.DEFAULT)
     }
     private gotoProcesses = async (): Promise<void> => {
-        this.navigate(ROUTE.APP.MANUFACTORY.PROCESSES)
+        this.navigate(ROUTE.APP.MANUFACTORY.PROCESSES.DEFAULT)
     }
     
     render() {
