@@ -5,9 +5,6 @@ import {Grid, Row} from "react-native-easy-grid";
 import HistoryItem from "../../../components/listitem/historyitem";
 import {ItemHistory, Item, IBusinessService, FactoryInjection, PUBLIC_TYPES} from 'business_core_app_react';
 import {PARAMS} from "../../../common";
-import MapView, {Polyline} from 'react-native-maps';
-import {Marker, Circle} from 'react-native-maps';
-import * as Styles from '../../../stylesheet';
 interface Props {
 }
 
@@ -44,18 +41,18 @@ export default class GoodsHistoryScreen extends BasesSreen<Props, State> {
             <View>
                 <Grid>
                     <Row size={1}>
-                        <MapView>
-                            {this.state.histories.map((item: ItemHistory) => (
-                                <Marker
-                                    coordinate={item.location}
-                                />
-                            ))}
-                            <Polyline strokeWidth={3}
-                                      strokeColor={Styles.color.Map.Line}
-                                coordinates={this.state.histories.map((item: ItemHistory) => {
-                                return item.location;
-                            })}/>
-                        </MapView>
+                        {/*<MapView>*/}
+                            {/*{this.state.histories.map((item: ItemHistory) => (*/}
+                                {/*<Marker*/}
+                                    {/*coordinate={item.location}*/}
+                                {/*/>*/}
+                            {/*))}*/}
+                            {/*<Polyline strokeWidth={3}*/}
+                                      {/*strokeColor={Styles.color.Map.Line}*/}
+                                {/*coordinates={this.state.histories.map((item: ItemHistory) => {*/}
+                                {/*return item.location;*/}
+                            {/*})}/>*/}
+                        {/*</MapView>*/}
                     </Row>
                     <Row size={2}>
                         <FlatList
