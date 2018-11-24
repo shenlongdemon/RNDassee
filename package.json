@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "7.1.2",
-    "business_core_app_react": "git+https://github.com/shenlongdemon/business_core_app_react.git#dassee",
+    "business_core_app_react": "git://github.com/shenlongdemon/business_core_app_react.git#dassee",
     "inversify": "4.13.0",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
