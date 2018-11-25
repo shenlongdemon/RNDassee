@@ -63,3 +63,12 @@ The mobile application repository
   ```bash
   npm cache clean --force && react-native start --reset-cache
   ```
+# Scanner QR code
+
+npm install react-native-camera --save
+react-native link react-native-camera
+
+# To install and start using react-native-qrcode-scanner:
+npm install react-native-qrcode-scanner --save
+react-native link react-native-qrcode-scanner
+react-native link react-native-permissions
