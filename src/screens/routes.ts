@@ -1,27 +1,31 @@
 export const ROUTE = {
-    LOGIN : 'login',
-    SWITCHFEATURE: {
-        DEFAULT: 'switchfeature',
+  LOGIN: 'login',
+  SWITCHFEATURE: {
+    DEFAULT: 'switchfeature',
+  },
+  APP: {
+    USER: {
+      DEFAULT: 'user',
     },
-    APP: {
-        USER: {
-            DEFAULT: 'user',
+    MANUFACTORY: {
+      DEFAULT: 'manufactory',
+      GOODSES: {
+        DEFAULT: 'goodses',
+        ITEM: {
+          DEFAULT: 'goodsdetail'
+        }
+      },
+      PROCESSES: {
+        DEFAULT: 'processes',
+        ITEM: {
+          DEFAULT: 'processdetail'
         },
-        MANUFACTORY: {
-            DEFAULT: 'manufactory',
-            GOODSES: {
-                DEFAULT: 'goodses',
-                ITEM: {
-                    DEFAULT: 'goodsdetail'
-                }
-            },
-            PROCESSES: {
-                DEFAULT: 'processes',
-                ITEM: {
-                    DEFAULT: 'detail'
-                }
-            }
-            
+        ADD_iTEM: {
+          DEFAULT: 'addprocess'
         },
+      },
+      SCANQRCODE: 'qrscanner'
+      
     },
+  },
 }

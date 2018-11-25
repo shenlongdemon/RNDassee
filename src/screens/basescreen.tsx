@@ -17,6 +17,14 @@ export default class Basescreen<T extends Props, S> extends React.Component<Prop
         super(props);
     }
     
+    setSellNavigateParam(data: any): void {
+      if (this.props.navigation) {
+        // @ts-ignore
+        this.props.navigation.setParams(data);
+      }
+     
+    }
+    
     navigate = (routeName: string, data: any | null = null): void => {
         if (this.props.navigation) {
             // @ts-ignore

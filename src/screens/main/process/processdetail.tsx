@@ -25,7 +25,7 @@ export default class ProcessDetail extends BasesSreen<Props, State> {
   constructor(props: Props) {
     super(props);
     this.componentDidFocus = this.componentDidFocus.bind(this);
-    const item: Process | null = this.getParam<Process>(PARAMS.PROCESS, null);
+    const item: Process | null = this.getParam<Process>(PARAMS.MATERIAL, null);
     this.state = {material: item!};
     
   }
@@ -33,20 +33,21 @@ export default class ProcessDetail extends BasesSreen<Props, State> {
   componentDidMount = async (): Promise<void> => {
     
   }
+  
   private componentDidFocus = async (): Promise<void> => {
     const res: MaterialDetailDto = await this.processService.getMaterialDetail(this.state.material.id);
     if (res.isSuccess) {
       this.setState({material: res.material!});
     }
     else {
-    
+      this.goBack();
     }
   }
   
   render() {
     return (
       <BasesSreen {...{...this.props, componentDidFocus: this.componentDidFocus}}>
-        <Text>{this.state.material.id}</Text>
+      
       </BasesSreen>
     );
   }

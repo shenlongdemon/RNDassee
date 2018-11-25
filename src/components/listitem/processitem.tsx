@@ -4,46 +4,63 @@ import {Col, Grid, Row} from 'react-native-easy-grid';
 import * as IMAGE from '../../assets';
 import BaseItem from './baseitem';
 import IBaseItem from './ibaseitem';
-import {Process} from 'business_core_app_react';
+import {FactoryInjection, IBusinessService, Material, PUBLIC_TYPES} from 'business_core_app_react';
+import * as Styles from '../../stylesheet';
 
-interface Props extends IBaseItem<Process> {
+interface Props extends IBaseItem<Material> {
 
 }
 
 interface State {
-    image: any;
 }
 
-export default class ProcessItem extends BaseItem<Process, State> {
-    constructor(props: Props) {
-        super(props);
-        // this.state = {image: {uri: this.props.item.avatar}};
-        this.state = {image: IMAGE.profile};
-    }
+export default class ProcessItem extends BaseItem<Material, State> {
+  private businessService: IBusinessService = FactoryInjection.get<IBusinessService>(PUBLIC_TYPES.IBusinessService);
+  
+  constructor(props: Props) {
+    super(props);
+  }
+  
+  componentDidMount = (): void => {
+  
+  }
+  
+  private formatDate(time: number): string {
+    return this.businessService.toDateString(time);
+  }
+  
+  private formatTime(time: number): string {
+    return this.businessService.toTimeString(time);
+  }
+  
+  render() {
     
-    componentDidMount = (): void => {
-    }
-    
-    render() {
-        
-        return (
-            // @ts-ignore
-            <BaseItem {...this.props} >
-                <Grid style={{height: 120}}>
-                    <Row>
-                        <Image style={{backgroundColor: 'transparent', height: '100%', width: '100%'}}
-                               source={this.state.image}
-                               resizeMode='contain'
-                               onError={({nativeEvent: {error}}) => {
-                                   alert('fdfdf');
-                               }}
-                        />
-                    </Row>
-                    <Row style={{height: 30, justifyContent: 'center'}}>
-                        <Text style={{color: '#ffffff'}} >{this.props.item.id}</Text>
-                    </Row>
-                </Grid>
-            </BaseItem>
-        );
-    }
+    return (
+      // @ts-ignore
+      <BaseItem {...this.props} >
+        <Grid style={{height: 100}}>
+          <Col size={1} style={{justifyContent:'center'}}>
+            <Image source={IMAGE.material_icon} style={{width: 40, height: 40}}/>
+          </Col>
+          
+          <Col size={5} style={{justifyContent:'center'}}>
+            <Text style={[Styles.styleSheet.label, {marginLeft: 10}]}>{this.props.item.name}</Text>
+          </Col>
+          
+          <Col size={2} style={{justifyContent:'center'}}>
+            <Image source={{uri: this.businessService.getLinkImage(this.props.item.imageUrl)}} style={{width: 70, height: 70}}/>
+          </Col>
+          
+          <Col size={2} style={{justifyContent:'center'}}>
+            
+              <Text style={[Styles.styleSheet.label, {alignSelf: 'flex-end'}]}>
+                Modified at{'\n'}{this.formatDate(this.props.item.updatedAt)}
+              </Text>
+           
+          </Col>
+          
+        </Grid>
+      </BaseItem>
+    );
+  }
 }

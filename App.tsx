@@ -7,17 +7,65 @@
  */
 
 import React from 'react'
+import {GeolocationReturnType} from 'react-native';
 import Startup from './app_start/startup';
 import {createStack} from './src/screens/screens';
-import { inject } from 'inversify';
-import { PUBLIC_TYPES, ITestService } from 'business_core_app_react';
+import {RNLocationEventEmitter} from 'react-native-location'
+import * as RNLocation from 'react-native-location';
+
+import {PUBLIC_TYPES, ITestService, Position, IBusinessService, FactoryInjection} from 'business_core_app_react';
 
 Startup.start();
 
 const RootStack = createStack;
+console.disableYellowBox = true;
 
 export default class App extends React.Component {
+  private businessService: IBusinessService = FactoryInjection.get<IBusinessService>(PUBLIC_TYPES.IBusinessService);
+  
+  componentWillMount() {
+    this.setupLocationTracking();
+  }
+  
+  private setupLocationTracking(): void {
+
+    navigator.geolocation.getCurrentPosition(
+      async (location: GeolocationReturnType) => {
+        const position: Position = {
+          coord: {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            altitude: location.coords.altitude || 0
+          },
+        };
+
+        await this.businessService.saveCurrentPosition(position);
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
+    );
+    const config: PositionOptions = {
+      enableHighAccuracy: true,
+      maximumAge: 1000,
+      timeout: 20000,
+    };
+  
+    navigator.geolocation.watchPosition(async (location: any) => {
+      console.log(location);
+      const position: Position = {
+        coord: {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+          altitude: location.coords.altitude || 0
+        },
+      };
+      console.log(`tracking ${JSON.stringify(position)}`);
+      await this.businessService.saveCurrentPosition(position);
+    },undefined, config);
+    
+  }
+  
   render() {
-    return <RootStack />;
+    return <RootStack/>;
   }
 }

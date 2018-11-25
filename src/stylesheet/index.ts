@@ -1,12 +1,13 @@
-import {StyleSheet} from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {StyleSheet} from "react-native";
 
 const color = {
-  Background: '#FFFFFF',
-  Icon: '#00b300',
+  Background: '#00',
+  Icon: '#FFFFFF',
   Red: '#FF0000',
-  Text: '#007100',
+  Text: '#FFFFFF',
   Navigation: {
-    Background: '#13b360',
+    Background: '#000000',
     Tint: '#FFFFFF',
   },
   Map: {
@@ -27,6 +28,24 @@ const styles = {
   ],
 };
 
+const styleSheet = StyleSheet.create({
+  label: {
+    color: color.Text
+  },
+  caption:{
+    color: color.Text,
+    fontWeight: 'bold'
+  },
+  floatTouchable: {
+    justifyContent: 'flex-end',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 70,
+    height: 70
+  }
+});
+
 
 const props = {
   btn: {
@@ -37,9 +56,11 @@ const props = {
     textStyle: {color: color.Text},
   },
   txt: {
+    iconClass: MaterialIcons,
+    iconColor: color.Icon,
     inputStyle: {color: color.Text},
     labelStyle: {color: color.Text},
-    style: {height: 50},
+    style: {height: 50, backgroundColor: color.Background},
     useNativeDriver: true,
   },
   errorTxt: {
@@ -47,4 +68,4 @@ const props = {
   }
 };
 
-export {props, color, styles};
+export {props, color, styles, styleSheet};
