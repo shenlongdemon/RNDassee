@@ -1,6 +1,8 @@
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BasesSreen from "../../basescreen";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {
   FactoryInjection,
   IBusinessService,
@@ -16,6 +18,7 @@ import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Button} from 'react-native-elements';
 import * as IMAGE from '../../../assets';
 import * as Styles from '../../../stylesheet';
+import {Jiro, Hoshi} from 'react-native-textinput-effects';
 
 interface Props {
 }
@@ -49,7 +52,8 @@ export default class AddProcess extends BasesSreen<Props, State> {
     this.state = {
       name: CONSTANTS.STR_EMPTY,
       bluetooth: CONSTANTS.STR_EMPTY,
-      description: CONSTANTS.STR_EMPTY
+      description: CONSTANTS.STR_EMPTY,
+      image: IMAGE.photo
     };
   }
   
@@ -86,23 +90,36 @@ export default class AddProcess extends BasesSreen<Props, State> {
         <Grid>
           <Row size={1}>
             <Grid>
-              <Col size={2}>
-              
+              <Col size={2} style={{justifyContent: 'center'}}>
+                <Text style={Styles.styleSheet.label}>Please tap on frame to pick an image</Text>
               </Col>
-              <Col size={1}></Col>
+              <Col size={1}>
+                <TouchableOpacity style={[styles.button, {justifyContent: 'flex-start'}]} onPress={() => {
+                }}>
+                  <Image style={styles.image} resizeMode={'contain'} source={this.state.image}/>
+                </TouchableOpacity>
+              </Col>
             </Grid>
           </Row>
           <Row size={1}>
-            <Text style={Styles.styleSheet.label}>Name</Text>
-          
+            <Grid>
+              <Col>
+                <Hoshi
+                  {...Styles.props.field}
+                  label={'Name'}
+                />
+              </Col>
+            </Grid>
           </Row>
-          <Row size={1}>
-            <Text style={Styles.styleSheet.label}>Description</Text>
+          <Row size={2}>
+            <Jiro
+              {...Styles.props.rtxt}
+              height={200}
+              label={'Description'}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+            />
           </Row>
-          <Row size={1}>
-          
-          </Row>
-          <Row size={1}></Row>
           <Row size={1}>
             <Text style={Styles.styleSheet.label}>Select Bluetooth what will follow this material</Text>
           </Row>
@@ -112,3 +129,21 @@ export default class AddProcess extends BasesSreen<Props, State> {
     );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  button: {
+    width: 120,
+    height: 120,
+    alignSelf: 'center'
+  },
+  image: {
+    width: 70,
+    height: 70,
+    alignSelf: 'center'
+  }
+});

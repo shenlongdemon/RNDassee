@@ -9,6 +9,7 @@ const ico_search = require('./ico_search.png');
 const ico_profile = require('./ico_profile.png');
 const ico_goods = require('./ico_goods.png');
 const gray_add = require('./gray_add.png');
+const photo = require('./photo.png');
 
 export {
   background,
@@ -21,5 +22,6 @@ export {
   ico_search,
   ico_profile,
   ico_goods,
-  gray_add
+  gray_add,
+  photo
 };

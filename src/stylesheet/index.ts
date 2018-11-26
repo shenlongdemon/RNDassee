@@ -6,6 +6,12 @@ const color = {
   Icon: '#FFFFFF',
   Red: '#FF0000',
   Text: '#FFFFFF',
+  rtxt: {
+    background: 'rgba(53, 53, 53, 0.5)'
+  },
+  field: {
+    border: 'rgba(53, 53, 53, 0.5)'
+  },
   Navigation: {
     Background: '#000000',
     Tint: '#FFFFFF',
@@ -18,9 +24,14 @@ const color = {
   },
 };
 
+const fontWeight = {
+  normal: 'normal',
+  bold: 'bold'
+};
+
 const styles = {
   Navigation: {
-    FontWeight: 'bold',
+    FontWeight: fontWeight.bold,
   },
   containerControl: [
     {justifyContent: 'center'},
@@ -32,7 +43,7 @@ const styleSheet = StyleSheet.create({
   label: {
     color: color.Text
   },
-  caption:{
+  caption: {
     color: color.Text,
     fontWeight: 'bold'
   },
@@ -60,8 +71,34 @@ const props = {
     iconColor: color.Icon,
     inputStyle: {color: color.Text},
     labelStyle: {color: color.Text},
-    style: {height: 50, backgroundColor: color.Background},
+    style: {height: 50, backgroundColor: color.rtxt.background},
     useNativeDriver: true,
+    autoCapitalize: false,
+    autoCorrect: false,
+    borderColor: color.field.border,
+  },
+  field: {
+    iconClass: MaterialIcons,
+    iconColor: color.Icon,
+    inputStyle: {color: color.Text},
+    labelStyle: {color: color.Text},
+    style: {height: 50, backgroundColor: color.Background},
+    borderColor: color.field.border,
+    
+    autoCapitalize: true,
+    autoCorrect: false
+  },
+  /**
+   * for Jiro
+   */
+  rtxt: {
+    multiline: true,
+    inputStyle: {color: color.Text, fontWeight: fontWeight.normal, textAlignVertical:'top'},
+    labelStyle: {color: color.Text},
+    style: {backgroundColor: color.Background, width: '100%'},
+    borderColor: color.rtxt.background,
+    autoCapitalize: true,
+    autoCorrect: false
   },
   errorTxt: {
     style: {color: color.Error.Message}
