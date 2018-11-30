@@ -18,13 +18,18 @@ export const ROUTE = {
       PROCESSES: {
         DEFAULT: 'processes',
         ITEM: {
-          DEFAULT: 'processdetail'
+          DEFAULT: 'processdetail',
+          TASK: {
+            DEFAULT: 'taskdetail',
+          },
         },
         ADD_iTEM: {
           DEFAULT: 'addprocess'
         },
+        
       },
-      SCANQRCODE: 'qrscanner'
+      SCANQRCODE: 'qrscanner',
+      BLUETOOTH: 'bluetooth'
       
     },
   },

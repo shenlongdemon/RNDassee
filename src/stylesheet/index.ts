@@ -3,9 +3,12 @@ import {StyleSheet} from "react-native";
 
 const color = {
   Background: '#00',
-  Icon: '#FFFFFF',
-  Red: '#FF0000',
-  Text: '#FFFFFF',
+  Icon: '#ffffff',
+  Indicator: 'rgba(255, 255, 255, 0.5)',
+  Red: '#ff0000',
+  Text: '#ffffff',
+  TextNegative: '#000000',
+  Identifier: '#138dd1',
   rtxt: {
     background: 'rgba(53, 53, 53, 0.5)'
   },
@@ -14,14 +17,17 @@ const color = {
   },
   Navigation: {
     Background: '#000000',
-    Tint: '#FFFFFF',
+    Tint: '#ffffff',
   },
   Map: {
-    Line: '#FFFFFF',
+    Line: '#ffffff',
   },
   Error: {
-    Message: '#FF0000',
+    Message: '#ff0000',
   },
+  list: {
+    itemDivider: '#444444'
+  }
 };
 
 const fontWeight = {
@@ -36,12 +42,15 @@ const styles = {
   containerControl: [
     {justifyContent: 'center'},
     {height: 60}
-  ],
+  ]
 };
 
 const styleSheet = StyleSheet.create({
   label: {
     color: color.Text
+  },
+  identifier: {
+    color: color.Identifier
   },
   caption: {
     color: color.Text,
@@ -54,7 +63,10 @@ const styleSheet = StyleSheet.create({
     right: 0,
     width: 70,
     height: 70
-  }
+  },
+  rowControl: {
+    height: 100,
+  },
 });
 
 
@@ -93,7 +105,7 @@ const props = {
    */
   rtxt: {
     multiline: true,
-    inputStyle: {color: color.Text, fontWeight: fontWeight.normal, textAlignVertical:'top'},
+    inputStyle: {color: color.Text, fontWeight: fontWeight.normal, textAlignVertical: 'top'},
     labelStyle: {color: color.Text},
     style: {backgroundColor: color.Background, width: '100%'},
     borderColor: color.rtxt.background,

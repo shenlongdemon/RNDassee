@@ -12,7 +12,9 @@ import GoodsInfoScreen from "./main/itemtabs/info";
 import GoodsHistoryScreen from "./main/itemtabs/history";
 import ProcessDetail from "./main/process/processdetail";
 import AddProcess from './main/process/addprocess';
-import QRCodeScannerScreen from "./main/qrcodescanner";
+import QRCodeScannerScreen from "./main/shared/qrcodescanner";
+import BluetoothScannerScreen from "./main/shared/bluetoothscanner";
+import TaskDetailScreen from "./main/process/taskdetail";
 
 const goodsTab = RNN.createTabNavigator(
   {
@@ -44,9 +46,11 @@ const manufactoryStack = RNN.createStackNavigator(
       }
     },
     processdetail: ProcessDetail,
+    taskdetail: TaskDetailScreen,
     addprocess: AddProcess,
     goodsdetail: goodsTab,
-    qrscanner: QRCodeScannerScreen
+    qrscanner: QRCodeScannerScreen,
+    bluetooth: BluetoothScannerScreen
   },
   {
     initialRouteName: 'main',

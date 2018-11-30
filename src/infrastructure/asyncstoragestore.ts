@@ -12,24 +12,13 @@ export class AsyncStorageStore implements IStore {
   }
   
   getUser = async (): Promise<User | null> => {
-    let json: string = await this.getItem(STORAGE_KEYS.USER, CONSTANTS.STR_EMPTY);
-    if (json !== CONSTANTS.STR_EMPTY) {
-      try {
-        let user: User = JSON.parse(json);
-        return user;
-      }
-      catch (e) {
-        return null;
-      }
-    }
-    else {
-      return null;
-    }
+    const user: User | null = await this.getObject<User>(STORAGE_KEYS.USER);
+    return user;
   }
   
-  getCurrentPosition = async (): Promise<Position | null> => {
+  getCurrentPosition = async (): Promise<Position> => {
     const position: Position | null = await this.getObject<Position>(STORAGE_KEYS.CURRENT_POSITION);
-    return position;
+    return position!;
   }
   
   saveCurrentPosition = async (position: Position): Promise<void> => {

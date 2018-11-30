@@ -23,6 +23,7 @@ interface Props {
 
 interface State {
   materials: Material[];
+  isLoading: boolean;
 }
 
 export default class ProcessesScreen extends BaseScreen<Props, State> {
@@ -31,29 +32,36 @@ export default class ProcessesScreen extends BaseScreen<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      materials: []
+      materials: [],
+      isLoading: false
     };
     this.clickListItem = this.clickListItem.bind(this);
     this.clickAddProcess = this.clickAddProcess.bind(this);
     this.componentDidFocus = this.componentDidFocus.bind(this);
   }
   
+  componentWillMount = async (): Promise<void> => {
+    this.loadProcesses();
+  }
+  
   private clickListItem = (item: Material, index: number): void => {
     const data: any = {};
-    data[PARAMS.MATERIAL] = item;
+    data[PARAMS.ITEM] = item;
     
     this.navigate(ROUTE.APP.MANUFACTORY.PROCESSES.ITEM.DEFAULT, data)
   }
   
   componentDidFocus = async (): Promise<void> => {
-    this.loadProcesses();
+  
   }
   
   private loadProcesses = async (): Promise<void> => {
+    this.setState({isLoading: true});
     const processListDto: ProcessListDto = await this.businessService.getProcesses();
     if (processListDto.isSuccess) {
       this.setState({materials: processListDto.materials});
     }
+    this.setState({isLoading: false});
   }
   
   private clickAddProcess(): void {
@@ -62,7 +70,7 @@ export default class ProcessesScreen extends BaseScreen<Props, State> {
   
   render() {
     return (
-      <BaseScreen {...{...this.props, componentDidFocus: this.componentDidFocus}}>
+      <BaseScreen {...{...this.props, componentDidFocus: this.componentDidFocus, isLoading: this.state.isLoading}}>
         <FlatList
           style={{flex: 1}}
           data={this.state.materials}

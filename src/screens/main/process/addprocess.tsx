@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View, ImageStyle} from 'react-native';
 import BasesSreen from "../../basescreen";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import ImagePicker from 'react-native-image-picker';
 
 import {
   FactoryInjection,
@@ -26,7 +27,8 @@ interface Props {
 interface State {
   name: string;
   description: string,
-  image?: any | null,
+  imageUri?: string,
+  imageData: any | null;
   bluetooth?: string | null;
 }
 
@@ -49,21 +51,70 @@ export default class AddProcess extends BasesSreen<Props, State> {
     super(props);
     this.componentDidFocus = this.componentDidFocus.bind(this);
     this.createMaterial = this.createMaterial.bind(this);
+    this.pickImage = this.pickImage.bind(this);
     this.state = {
       name: CONSTANTS.STR_EMPTY,
       bluetooth: CONSTANTS.STR_EMPTY,
       description: CONSTANTS.STR_EMPTY,
-      image: IMAGE.photo
+      imageUri: CONSTANTS.STR_EMPTY,
+      imageData: null
     };
+  }
+  
+  pickImage = () : void => {
+    const options = {
+      title: 'Select',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    
+    ImagePicker.showImagePicker(options, (response: {
+      customButton: string;
+      didCancel: boolean;
+      error: string;
+      data: string;
+      uri: string;
+      origURL?: string;
+      isVertical: boolean;
+      width: number;
+      height: number;
+      fileSize: number;
+      type?: string;
+      fileName?: string;
+      path?: string;
+      latitude?: number;
+      longitude?: number;
+      timestamp?: string;
+    }) => {
+      console.log('Response = ', response);
+    
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+      
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+      
+        this.setState({
+          imageUri: response.uri,
+          imageData: response.data
+        });
+      }
+    });
   }
   
   private async createMaterial(): Promise<void> {
     
     
-    const image: any = IMAGE.material_icon;
     const bledeviceId: string = CONSTANTS.STR_EMPTY;
     const res: CreateMaterialDto = await this.processService.createMaterial(
-      this.state.name, this.state.description, image, bledeviceId
+      this.state.name, this.state.description, this.state.imageData, bledeviceId
     );
     
     if (res.isSuccess) {
@@ -94,9 +145,8 @@ export default class AddProcess extends BasesSreen<Props, State> {
                 <Text style={Styles.styleSheet.label}>Please tap on frame to pick an image</Text>
               </Col>
               <Col size={1}>
-                <TouchableOpacity style={[styles.button, {justifyContent: 'flex-start'}]} onPress={() => {
-                }}>
-                  <Image style={styles.image} resizeMode={'contain'} source={this.state.image}/>
+                <TouchableOpacity style={[styles.button, {justifyContent: 'flex-start'}]} onPress={this.pickImage}>
+                  <Image resizeMode={'contain'} source={this.state.imageUri === CONSTANTS.STR_EMPTY ? IMAGE.photo : {uri: this.state.imageUri}} style={styles.image as ImageStyle} />
                 </TouchableOpacity>
               </Col>
             </Grid>

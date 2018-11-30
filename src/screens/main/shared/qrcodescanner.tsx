@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
-import BaseScreen from '../basescreen';
+import BaseScreen from '../../basescreen';
 import {Button} from 'react-native-elements';
-import * as Styles from '../../stylesheet';
+import * as Styles from '../../../stylesheet/index';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {
   CONSTANTS,
@@ -29,42 +29,39 @@ export default class QRCodeScannerScreen extends BaseScreen<Props, State> {
   
   constructor(props: Props) {
     super(props);
+    this.onSuccess = this.onSuccess.bind(this);
     this.state = {isProcess: false};
-    this.onResult = this.onResult.bind(this);
+    
   }
+
   
-  private onResult = async (result: { data: string }): Promise<void> => {
-    alert(result.data);
-    if (!this.state.isProcess && result.data !== CONSTANTS.STR_EMPTY) {
+  async onSuccess(e) {
+    if (!this.state.isProcess && e && e.data !== CONSTANTS.STR_EMPTY) {
       this.setState({isProcess: true});
-      const res: ObjectOfQRCodeDto = await this.businessService.getObjectByQRCode(result.data);
+      const res: ObjectOfQRCodeDto = await this.businessService.getObjectByQRCode(e.data);
+      this.setState({isProcess: false});
       if (res.isSuccess && res.object) {
         if (res.object.type === ScanQRItemType.material) {
-        
+
         }
         else if (res.object.type === ScanQRItemType.product) {
-        
+
         }
       }
-      
-      
-      this.setState({isProcess: false});
+     
     }
-    this.scanner.reactivate();
     
+    setTimeout(() => { this.scanner.reactivate();}, 2000);
   }
   
   render() {
     return (
-      <BaseScreen {...{...this.props}}>
+      <BaseScreen {...{...this.props, isLoading: this.state.isProcess}}>
         <Grid>
           <Row>
-            
             <QRCodeScanner
-              ref={(node) => {
-                this.scanner = node
-              }}
-              onRead={this.onResult}
+              ref={(node) => { this.scanner = node }}
+              onRead={this.onSuccess}
             />
           </Row>
         </Grid>
